@@ -1,0 +1,1354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Neha Mahato — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --navy:    #0A1628;
+    --deep:    #0D2045;
+    --blue:    #1A5CFF;
+    --accent:  #00C8FF;
+    --teal:    #0AFFE0;
+    --card:    #0F2040;
+    --border:  rgba(0,200,255,0.15);
+    --text:    #E8F0FF;
+    --muted:   #7A97C4;
+    --white:   #FFFFFF;
+    --grad1:   linear-gradient(135deg, #1A5CFF 0%, #00C8FF 100%);
+    --grad2:   linear-gradient(135deg, #0AFFE0 0%, #1A5CFF 100%);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Space Grotesk', sans-serif;
+    background: var(--navy);
+    color: var(--text);
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.1rem 5%;
+    background: rgba(10,22,40,0.85);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.15rem; font-weight: 700;
+    background: var(--grad1); -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: 0.01em;
+  }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    color: var(--muted); text-decoration: none;
+    font-size: 0.9rem; font-weight: 500; letter-spacing: 0.04em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    position: relative; overflow: hidden;
+    padding: 7rem 5% 4rem;
+  }
+  .hero-bg {
+    position: absolute; inset: 0; z-index: 0;
+    background: radial-gradient(ellipse 80% 60% at 70% 50%,
+      rgba(26,92,255,0.18) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 40% at 20% 80%,
+      rgba(10,255,224,0.1) 0%, transparent 60%);
+  }
+  /* animated circuit grid */
+  .hero-grid {
+    position: absolute; inset: 0; z-index: 0;
+    background-image:
+      linear-gradient(rgba(26,92,255,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(26,92,255,0.06) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 80% 80% at 70% 50%, black 30%, transparent 100%);
+  }
+
+  .hero-content { position: relative; z-index: 1; max-width: 680px; }
+
+  .hero-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.8rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 1.2rem;
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+  .hero-eyebrow::before {
+    content: ''; width: 32px; height: 1px; background: var(--accent);
+  }
+
+  .hero h1 {
+    font-size: clamp(2.8rem, 6vw, 5rem);
+    font-weight: 700; line-height: 1.07;
+    letter-spacing: -0.03em;
+    margin-bottom: 0.4rem;
+  }
+  .hero h1 .name-accent {
+    background: var(--grad1); -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .hero-tagline {
+    font-size: clamp(1rem, 2vw, 1.3rem);
+    color: var(--muted); font-weight: 400;
+    margin-bottom: 1.5rem;
+  }
+  .hero-desc {
+    font-size: 1rem; color: var(--muted);
+    max-width: 540px; margin-bottom: 2.5rem;
+    line-height: 1.8;
+  }
+
+  .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn-primary {
+    padding: 0.85rem 2rem; border-radius: 8px;
+    background: var(--grad1); color: #fff;
+    font-weight: 600; font-size: 0.95rem;
+    text-decoration: none; border: none; cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 0 24px rgba(26,92,255,0.4);
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(26,92,255,0.5); }
+  .btn-outline {
+    padding: 0.85rem 2rem; border-radius: 8px;
+    border: 1px solid var(--border); color: var(--text);
+    font-weight: 500; font-size: 0.95rem;
+    text-decoration: none; background: transparent;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+  /* floating stat badges */
+  .hero-stats {
+    position: absolute; right: 5%; top: 50%;
+    transform: translateY(-50%);
+    display: flex; flex-direction: column; gap: 1rem;
+    z-index: 1;
+  }
+  .stat-badge {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 1rem 1.4rem;
+    text-align: center; min-width: 130px;
+    animation: float 4s ease-in-out infinite;
+  }
+  .stat-badge:nth-child(2) { animation-delay: 1.3s; }
+  .stat-badge:nth-child(3) { animation-delay: 2.6s; }
+  .stat-num {
+    font-size: 2rem; font-weight: 700;
+    background: var(--grad2); -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: block;
+  }
+  .stat-label { font-size: 0.75rem; color: var(--muted); }
+  @keyframes float {
+    0%,100% { transform: translateY(0); }
+    50%      { transform: translateY(-8px); }
+  }
+
+  /* ── SECTION COMMON ── */
+  section { padding: 5rem 5%; }
+  .section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: 0.6rem;
+    display: flex; align-items: center; gap: 0.6rem;
+  }
+  .section-label::before { content: ''; width: 24px; height: 1px; background: var(--accent); }
+  .section-title {
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    font-weight: 700; letter-spacing: -0.02em;
+    margin-bottom: 1rem;
+  }
+  .section-divider {
+    width: 48px; height: 3px; border-radius: 2px;
+    background: var(--grad1); margin-bottom: 3rem;
+  }
+
+  /* ── ABOUT ── */
+  #about { background: var(--deep); }
+  .about-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 4rem; align-items: center;
+  }
+  .about-visual {
+    position: relative; display: flex; justify-content: center; align-items: center;
+  }
+  .portrait-frame {
+    position: relative; width: 300px; height: 340px;
+  }
+  .portrait-frame::before {
+    content: ''; position: absolute; inset: -3px;
+    border-radius: 24px;
+    background: var(--grad1);
+    z-index: 0;
+  }
+  .portrait-frame::after {
+    content: ''; position: absolute;
+    width: 100%; height: 100%;
+    border-radius: 22px;
+    border: 1px dashed rgba(0,200,255,0.3);
+    top: 12px; left: 12px;
+    z-index: -1;
+  }
+  .portrait-img {
+    width: 100%; height: 100%; object-fit: cover;
+    border-radius: 22px; position: relative; z-index: 1;
+    display: block;
+  }
+  .portrait-placeholder {
+    width: 100%; height: 100%; border-radius: 22px;
+    background: linear-gradient(135deg, #0D2045, #1A3A6A);
+    display: flex; flex-direction: column; align-items: center;
+    justify-content: center; gap: 1rem; position: relative; z-index: 1;
+    border: 1px solid rgba(0,200,255,0.1);
+  }
+  .portrait-placeholder .upload-icon { font-size: 3rem; opacity: 0.5; }
+  .portrait-placeholder .upload-text {
+    font-size: 0.82rem; color: var(--muted); text-align: center;
+    padding: 0 1.5rem; line-height: 1.6;
+  }
+  .portrait-placeholder .upload-label {
+    padding: 0.5rem 1.2rem; border-radius: 8px;
+    border: 1px solid var(--border); color: var(--accent);
+    font-size: 0.8rem; cursor: pointer; transition: border-color 0.2s;
+  }
+  .portrait-placeholder .upload-label:hover { border-color: var(--accent); }
+  .about-text p { color: var(--muted); margin-bottom: 1.2rem; line-height: 1.85; }
+  .about-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.5rem; }
+  .tag {
+    padding: 0.35rem 0.9rem; border-radius: 100px;
+    border: 1px solid var(--border);
+    font-size: 0.8rem; color: var(--accent);
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* ── SKILLS ── */
+  #skills { }
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+  .skill-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 16px; padding: 1.8rem;
+    transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+  }
+  .skill-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(0,200,255,0.4);
+    box-shadow: 0 12px 32px rgba(26,92,255,0.15);
+  }
+  .skill-icon {
+    width: 48px; height: 48px; border-radius: 12px;
+    background: linear-gradient(135deg, #2D2060 0%, #1A3A5C 100%);
+    border: 1px solid rgba(124,77,255,0.35);
+    display: flex; align-items: center;
+    justify-content: center; font-size: 1.5rem; margin-bottom: 1rem;
+  }
+  .skill-card h3 { font-size: 1.05rem; font-weight: 600; margin-bottom: 0.75rem; }
+  .skill-bars { display: flex; flex-direction: column; gap: 0.6rem; }
+  .skill-row { display: flex; flex-direction: column; gap: 0.25rem; }
+  .skill-name { font-size: 0.8rem; color: var(--muted); display: flex; justify-content: space-between; }
+  .bar-track {
+    height: 4px; background: rgba(255,255,255,0.08);
+    border-radius: 2px; overflow: hidden;
+  }
+  .bar-fill {
+    height: 100%; border-radius: 2px;
+    background: var(--grad1);
+    transform-origin: left;
+    animation: growBar 1.2s ease forwards;
+    transform: scaleX(0);
+  }
+  @keyframes growBar { to { transform: scaleX(1); } }
+
+  /* ── EXPERIENCE ── */
+  #experience { background: var(--deep); }
+  .timeline { position: relative; padding-left: 2rem; }
+  .timeline::before {
+    content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--blue), var(--accent), transparent);
+  }
+  .timeline-item {
+    position: relative; margin-bottom: 3rem;
+    padding-left: 1.5rem;
+  }
+  .timeline-dot {
+    position: absolute; left: -2.5rem; top: 0.3rem;
+    width: 12px; height: 12px; border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 12px var(--accent);
+    border: 2px solid var(--navy);
+  }
+  .timeline-date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem; color: var(--accent);
+    letter-spacing: 0.1em; margin-bottom: 0.4rem;
+  }
+  .timeline-item h3 { font-size: 1.15rem; font-weight: 600; margin-bottom: 0.25rem; }
+  .timeline-item .role { color: var(--muted); font-size: 0.9rem; margin-bottom: 0.75rem; }
+  .timeline-item ul { list-style: none; }
+  .timeline-item li {
+    color: var(--muted); font-size: 0.92rem; padding: 0.3rem 0;
+    padding-left: 1.2rem; position: relative;
+  }
+  .timeline-item li::before {
+    content: '›'; color: var(--accent);
+    position: absolute; left: 0;
+  }
+
+  /* ── PROJECTS ── */
+  #projects { }
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
+  }
+  .project-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 20px; overflow: hidden;
+    transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+  }
+  .project-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 48px rgba(26,92,255,0.2);
+    border-color: rgba(0,200,255,0.35);
+  }
+  .project-vis {
+    height: 210px;
+    position: relative; overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+    background: #070D18;
+  }
+  /* SVG circuit/waveform visualization */
+  .project-vis svg { width: 100%; height: 100%; }
+
+  .project-body { padding: 1.5rem; }
+  .project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.75rem; }
+  .ptag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem; padding: 0.2rem 0.65rem;
+    border-radius: 100px; background: rgba(26,92,255,0.15);
+    color: var(--accent); border: 1px solid rgba(26,92,255,0.3);
+  }
+  .project-body h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; }
+  .project-body p { font-size: 0.88rem; color: var(--muted); line-height: 1.7; margin-bottom: 1rem; }
+  .project-links { display: flex; gap: 0.75rem; }
+  .plink {
+    font-size: 0.82rem; font-weight: 500;
+    color: var(--accent); text-decoration: none;
+    display: flex; align-items: center; gap: 0.3rem;
+    transition: opacity 0.2s;
+  }
+  .plink:hover { opacity: 0.7; }
+
+  /* ── CERTIFICATIONS ── */
+  #certifications { background: var(--deep); }
+  .cert-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1rem;
+  }
+  .cert-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 1.2rem 1.4rem;
+    display: flex; gap: 1rem; align-items: flex-start;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .cert-card:hover { border-color: var(--accent); transform: translateX(4px); }
+  .cert-icon {
+    width: 38px; height: 38px; flex-shrink: 0;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #2D2060 0%, #1A3A5C 100%);
+    border: 1px solid rgba(124,77,255,0.35);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem;
+  }
+  .cert-info h4 { font-size: 0.9rem; font-weight: 600; margin-bottom: 0.2rem; }
+  .cert-info span { font-size: 0.75rem; color: var(--muted); font-family: 'JetBrains Mono', monospace; }
+
+  /* ── TESTIMONIALS ── */
+  #testimonials { }
+  .testi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+  .testi-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 20px; padding: 2rem;
+    position: relative;
+  }
+  .testi-card::before {
+    content: '"'; font-size: 5rem; line-height: 1;
+    color: rgba(26,92,255,0.25);
+    position: absolute; top: 0.5rem; left: 1.2rem;
+    font-family: Georgia, serif;
+  }
+  .testi-text { font-size: 0.95rem; color: var(--muted); line-height: 1.8; margin-bottom: 1.5rem; padding-top: 1rem; }
+  .testi-author { display: flex; align-items: center; gap: 0.75rem; }
+  .testi-avatar {
+    width: 42px; height: 42px; border-radius: 50%;
+    background: linear-gradient(135deg, #2D2060 0%, #1A3A5C 100%);
+    border: 1px solid rgba(124,77,255,0.35);
+    display: flex; align-items: center;
+    justify-content: center; font-size: 1.2rem;
+  }
+  .testi-author-info .name { font-weight: 600; font-size: 0.9rem; }
+  .testi-author-info .title { font-size: 0.78rem; color: var(--muted); }
+
+  /* ── CONTACT ── */
+  #contact { background: var(--deep); }
+  .contact-wrapper {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 4rem; align-items: start;
+  }
+  .contact-info h3 { font-size: 1.5rem; font-weight: 600; margin-bottom: 1rem; }
+  .contact-info p { color: var(--muted); margin-bottom: 2rem; }
+  .contact-items { display: flex; flex-direction: column; gap: 1rem; }
+  .contact-item {
+    display: flex; align-items: center; gap: 1rem;
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 12px; padding: 1rem 1.2rem;
+    text-decoration: none;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .contact-item:hover { border-color: var(--accent); transform: translateX(4px); }
+  .ci-icon {
+    width: 38px; height: 38px; border-radius: 8px;
+    background: rgba(26,92,255,0.2); display: flex;
+    align-items: center; justify-content: center; font-size: 1.1rem;
+    flex-shrink: 0;
+  }
+  .ci-label { font-size: 0.75rem; color: var(--muted); margin-bottom: 0.1rem; }
+  .ci-value { font-size: 0.9rem; color: var(--text); font-weight: 500; }
+
+  .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+  .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+  .form-group label { font-size: 0.82rem; color: var(--muted); }
+  .form-group input,
+  .form-group textarea {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 10px; padding: 0.85rem 1rem;
+    color: var(--text); font-family: inherit; font-size: 0.95rem;
+    transition: border-color 0.2s;
+    outline: none; resize: none;
+  }
+  .form-group input:focus,
+  .form-group textarea:focus { border-color: var(--accent); }
+
+  /* ── FOOTER ── */
+  footer {
+    text-align: center; padding: 2rem 5%;
+    border-top: 1px solid var(--border);
+    color: var(--muted); font-size: 0.85rem;
+  }
+  footer span { color: var(--accent); }
+
+  /* ── SCROLL REVEAL ── */
+  .reveal {
+    opacity: 0; transform: translateY(28px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── MOBILE ── */
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .hero-stats { display: none; }
+    .about-grid,
+    .contact-wrapper { grid-template-columns: 1fr; }
+    .about-visual { margin-bottom: 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Neha Mahato</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#certifications">Certs</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Diploma Graduate (2026) · Electronics & Telecom</div>
+    <h1>Hi, I'm<br/><span class="name-accent">Neha Mahato</span></h1>
+    <p class="hero-tagline">Bridging Hardware & Software through Embedded Intelligence</p>
+    <p class="hero-desc">
+      I build systems that think — from Arduino-powered solar trackers to health
+      monitoring devices. Passionate about Embedded Systems, IoT, and Electronics
+      Design that solves real-world problems.
+    </p>
+    <div class="hero-ctas">
+      <a href="#projects" class="btn-primary">View Projects</a>
+      <a href="#contact" class="btn-outline">Get in Touch</a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="stat-badge">
+      <span class="stat-num">83%</span>
+      <span class="stat-label">Diploma Score</span>
+    </div>
+    <div class="stat-badge">
+      <span class="stat-num">2+</span>
+      <span class="stat-label">Live Projects</span>
+    </div>
+    <div class="stat-badge">
+      <span class="stat-num">6+</span>
+      <span class="stat-label">Certifications</span>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="reveal">
+    <div class="section-label">Who I Am</div>
+    <h2 class="section-title">About Me</h2>
+    <div class="section-divider"></div>
+  </div>
+  <div class="about-grid">
+    <div class="about-visual reveal">
+      <div class="portrait-frame" id="portraitFrame">
+        <!--
+          
+        -->
+        <img
+          src="C:\Users\ASUS\Desktop\portfolio\photo5.jpg"
+          alt="Neha Mahato"
+          class="portrait-img"
+          id="portraitImg"
+          onerror="this.style.display='none'; document.getElementById('portraitPlaceholder').style.display='flex';"
+        />
+        <div class="portrait-placeholder" id="portraitPlaceholder" style="display:none;">
+          <span class="upload-icon">📷</span>
+          <p class="upload-text">Save your photo as <strong style="color:var(--accent)">photo.jpg</strong> in the same folder as this HTML file</p>
+        </div>
+      </div>
+    </div>
+    <div class="about-text reveal">
+      <p>I'm a Diploma graduate in Electronics & Telecommunication Engineering from Women's Polytechnic Chandernagore (2026), having completed my diploma with an 83.4% score. I'm passionate about building things that exist at the intersection of hardware and software.</p>
+      <p>From programming microcontrollers in Embedded C to simulating circuits in Proteus and designing, I bring a hands-on approach to every problem. My projects have been built with real constraints in mind — my health monitor prototype cost just ₹1,050 and is designed for rural and home healthcare.</p>
+      <p>I'm actively seeking entry-level roles in <strong>Embedded Systems, IoT, or Electronics Design</strong> where I can apply my technical skills to meaningful, real-world hardware-software integration challenges.</p>
+      <div class="about-tags">
+        <span class="tag">Embedded C</span>
+        <span class="tag">Arduino</span>
+        <span class="tag">Proteus</span>
+        <span class="tag">IoT</span>
+        <span class="tag">Python</span>
+        <span class="tag">PCB Design</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="reveal">
+    <div class="section-label">What I Know</div>
+    <h2 class="section-title">Technical Skills</h2>
+    <div class="section-divider"></div>
+  </div>
+  <div class="skills-grid">
+
+    <div class="skill-card reveal">
+      <div class="skill-icon">⚡</div>
+      <h3>Embedded Systems</h3>
+      <div class="skill-bars">
+        <div class="skill-row">
+          <div class="skill-name"><span>Embedded C</span><span>90%</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:90%"></div></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-name"><span>Arduino UNO</span><span>92%</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:92%"></div></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-name"><span>Microcontroller Programming</span><span>85%</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:85%"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="skill-card reveal">
+      <div class="skill-icon">🔧</div>
+      <h3>Circuit Design & Simulation</h3>
+      <div class="skill-bars">
+        <div class="skill-row">
+          <div class="skill-name"><span>Proteus Simulation</span><span>88%</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:88%"></div></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-name"><span>PCB Design Concepts</span><span>75%</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:75%"></div></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-name"><span>Sensor Integration</span><span>87%</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:87%"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="skill-card reveal">
+      <div class="skill-icon">💻</div>
+      <h3>Programming</h3>
+      <div class="skill-bars">
+        <div class="skill-row">
+          <div class="skill-name"><span>C Programming</span><span>85%</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:85%"></div></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-name"><span>Python</span><span>75%</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:75%"></div></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-name"><span>Data Structures & Algorithms</span><span>78%</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:78%"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="skill-card reveal">
+      <div class="skill-icon">🌐</div>
+      <h3>Networking & IoT</h3>
+      <div class="skill-bars">
+        <div class="skill-row">
+          <div class="skill-name"><span>Cisco Packet Tracer</span><span>78%</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:78%"></div></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-name"><span>IoT System Design</span><span>80%</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:80%"></div></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-name"><span>Networking Fundamentals</span><span>76%</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:76%"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="skill-card reveal">
+      <div class="skill-icon">🤖</div>
+      <h3>Emerging Tech</h3>
+      <div class="skill-bars">
+        <div class="skill-row">
+          <div class="skill-name"><span>Generative AI Concepts</span><span>70%</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:70%"></div></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-name"><span>Project Management</span><span>80%</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:80%"></div></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-name"><span>Critical Thinking</span><span>88%</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:88%"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="skill-card reveal">
+      <div class="skill-icon">🗣</div>
+      <h3>Communication</h3>
+      <div class="skill-bars">
+        <div class="skill-row">
+          <div class="skill-name"><span>English</span><span>85%</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:85%"></div></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-name"><span>Bengali (Native)</span><span>100%</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:100%"></div></div>
+        </div>
+        <div class="skill-row">
+          <div class="skill-name"><span>Hindi</span><span>80%</span></div>
+          <div class="bar-track"><div class="bar-fill" style="width:80%"></div></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- EXPERIENCE / EDUCATION -->
+<section id="experience">
+  <div class="reveal">
+    <div class="section-label">My Journey</div>
+    <h2 class="section-title">Education & Experience</h2>
+    <div class="section-divider"></div>
+  </div>
+  <div class="timeline reveal">
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-date">2023 – 2026</div>
+      <h3>Diploma in Electronics & Telecommunication Engineering</h3>
+      <p class="role">Women's Polytechnic Chandernagore · WBSCTVESD · 83.4% (Completed)</p>
+      <ul>
+        <li>Specialized in Embedded Systems, microcontroller programming, and circuit simulation</li>
+        <li>Completed two end-to-end hardware projects — solar tracker and health monitoring device</li>
+        <li>Presented project at Science Exhibition, Hooghly Institute of Technology (Feb 2026)</li>
+        <li>Acquired hands-on skills in Proteus, Arduino, Embedded C, and Python</li>
+      </ul>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-date">2021 – 2023</div>
+      <h3>Higher Secondary (Class XII)</h3>
+      <p class="role">Hooghly Girls' High School · WBCHSE · 83.6%</p>
+      <ul>
+        <li>Scored 83.6% with a focus on Science stream</li>
+        <li>Developed strong analytical foundation that drives my engineering problem-solving approach</li>
+      </ul>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-date">2019 – 2021</div>
+      <h3>Secondary (Class X)</h3>
+      <p class="role">Hooghly Girls' High School · WBBSE · 74%</p>
+      <ul>
+        <li>Completed secondary education with a solid academic record</li>
+        <li>Developed early interest in electronics and applied sciences</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="reveal">
+    <div class="section-label">What I've Built</div>
+    <h2 class="section-title">Projects</h2>
+    <div class="section-divider"></div>
+  </div>
+  <div class="projects-grid">
+
+    <!-- Project 1: Solar Tracker Flow -->
+    <div class="project-card reveal">
+      <div class="project-vis">
+        <svg viewBox="0 0 360 210" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="a1" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0.5 L0,6.5 L6.5,3.5 z" fill="#FFD700"/></marker>
+            <marker id="a2" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0.5 L0,6.5 L6.5,3.5 z" fill="#7C4DFF"/></marker>
+            <marker id="a3" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0.5 L0,6.5 L6.5,3.5 z" fill="#00C8FF"/></marker>
+          </defs>
+
+          <!-- Header -->
+          <text x="14" y="14" fill="rgba(255,215,0,0.55)" font-size="7.5" font-family="monospace" letter-spacing="1.5">SOLAR TRACKER · INPUT → SENSE → PROCESS → ACTUATE → HARVEST</text>
+          <line x1="14" y1="18" x2="346" y2="18" stroke="rgba(255,215,0,0.18)" stroke-width="0.8"/>
+
+          <!-- Stage dividers -->
+          <line x1="96"  y1="22" x2="96"  y2="196" stroke="rgba(255,255,255,0.05)" stroke-width="1" stroke-dasharray="4,4"/>
+          <line x1="168" y1="22" x2="168" y2="196" stroke="rgba(255,255,255,0.05)" stroke-width="1" stroke-dasharray="4,4"/>
+          <line x1="252" y1="22" x2="252" y2="196" stroke="rgba(255,255,255,0.05)" stroke-width="1" stroke-dasharray="4,4"/>
+          <line x1="298" y1="22" x2="298" y2="196" stroke="rgba(255,255,255,0.05)" stroke-width="1" stroke-dasharray="4,4"/>
+
+          <!-- Stage labels -->
+          <text x="28"  y="202" fill="rgba(255,215,0,0.5)"   font-size="7" font-family="monospace">INPUT</text>
+          <text x="105" y="202" fill="rgba(124,77,255,0.5)"   font-size="7" font-family="monospace">SENSE</text>
+          <text x="180" y="202" fill="rgba(124,77,255,0.5)"   font-size="7" font-family="monospace">PROCESS</text>
+          <text x="255" y="202" fill="rgba(0,200,255,0.5)"    font-size="7" font-family="monospace">ACTUATE</text>
+          <text x="302" y="202" fill="rgba(0,200,160,0.5)"    font-size="7" font-family="monospace">HARVEST</text>
+
+          <!-- INPUT: Animated Sun (glowing pulse) -->
+          <circle cx="48" cy="103" r="24" fill="none" stroke="#FFD700" stroke-width="2">
+            <animate attributeName="r" values="24;26;24" dur="2s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="1;0.75;1" dur="2s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="48" cy="103" r="11" fill="#FFD700" opacity="0.22"/>
+          <!-- sun rays -->
+          <line x1="48" y1="70" x2="48" y2="63" stroke="#FFD700" stroke-width="2"/>
+          <line x1="48" y1="136" x2="48" y2="143" stroke="#FFD700" stroke-width="2"/>
+          <line x1="15" y1="103" x2="8"  y2="103" stroke="#FFD700" stroke-width="2"/>
+          <line x1="81" y1="103" x2="88" y2="103" stroke="#FFD700" stroke-width="2"/>
+          <line x1="27" y1="82"  x2="22" y2="77"  stroke="#FFD700" stroke-width="1.5"/>
+          <line x1="69" y1="124" x2="74" y2="129" stroke="#FFD700" stroke-width="1.5"/>
+          <line x1="69" y1="82"  x2="74" y2="77"  stroke="#FFD700" stroke-width="1.5"/>
+          <line x1="27" y1="124" x2="22" y2="129" stroke="#FFD700" stroke-width="1.5"/>
+          <text x="30" y="160" fill="#FFD700" font-size="8" font-family="monospace">SUNLIGHT</text>
+
+          <!-- Arrow INPUT → SENSE (top and bottom) -->
+          <line x1="80" y1="90" x2="102" y2="80"  stroke="#FFD700" stroke-width="1.3" marker-end="url(#a1)"/>
+          <line x1="80" y1="116" x2="102" y2="126" stroke="#FFD700" stroke-width="1.3" marker-end="url(#a1)"/>
+
+          <!-- Animated signal dots: sun to LDR (2 channels, staggered) -->
+          <circle r="3.5" fill="#FFD700" opacity="0.9">
+            <animateMotion dur="1.8s" repeatCount="indefinite" begin="0s">
+              <mpath><path d="M80,90 Q92,85 102,80"/></mpath>
+            </animateMotion>
+          </circle>
+          <circle r="3.5" fill="#FFD700" opacity="0.9">
+            <animateMotion dur="1.8s" repeatCount="indefinite" begin="0.9s">
+              <mpath><path d="M80,116 Q92,121 102,126"/></mpath>
+            </animateMotion>
+          </circle>
+
+          <!-- SENSE: Two LDR sensors -->
+          <rect x="102" y="64" width="58" height="28" rx="4" fill="#0D1F3A" stroke="#7C4DFF" stroke-width="1.3"/>
+          <polyline points="107,78 112,70 117,86 122,66 127,88 132,75 137,78 152,78" fill="none" stroke="#7C4DFF" stroke-width="1.5"/>
+          <text x="105" y="104" fill="#B39DFF" font-size="7" font-family="monospace">LDR-LEFT</text>
+
+          <rect x="102" y="114" width="58" height="28" rx="4" fill="#0D1F3A" stroke="#7C4DFF" stroke-width="1.3"/>
+          <polyline points="107,128 112,120 117,136 122,116 127,138 132,125 137,128 152,128" fill="none" stroke="#7C4DFF" stroke-width="1.5"/>
+          <text x="103" y="154" fill="#B39DFF" font-size="7" font-family="monospace">LDR-RIGHT</text>
+
+          <!-- Arrow SENSE → PROCESS (top) -->
+          <line x1="160" y1="78"  x2="174" y2="95"  stroke="#7C4DFF" stroke-width="1.3" marker-end="url(#a2)"/>
+          <line x1="160" y1="128" x2="174" y2="115" stroke="#7C4DFF" stroke-width="1.3" marker-end="url(#a2)"/>
+
+          <!-- Animated dots: LDR to Arduino -->
+          <circle r="3.5" fill="#7C4DFF" opacity="0.9">
+            <animateMotion dur="1.8s" repeatCount="indefinite" begin="0.45s">
+              <mpath><path d="M160,78 Q168,87 174,95"/></mpath>
+            </animateMotion>
+          </circle>
+          <circle r="3.5" fill="#7C4DFF" opacity="0.9">
+            <animateMotion dur="1.8s" repeatCount="indefinite" begin="1.35s">
+              <mpath><path d="M160,128 Q168,121 174,115"/></mpath>
+            </animateMotion>
+          </circle>
+
+          <!-- PROCESS: Arduino UNO -->
+          <rect x="174" y="72" width="72" height="66" rx="5" fill="#0D1F3A" stroke="#7C4DFF" stroke-width="1.8"/>
+          <path d="M194,72 Q210,64 226,72" fill="none" stroke="#7C4DFF" stroke-width="1.2"/>
+          <text x="210" y="97"  fill="#7C4DFF" font-size="9"   font-weight="bold" font-family="monospace" text-anchor="middle">ARDUINO</text>
+          <text x="210" y="109" fill="#7C4DFF" font-size="9"   font-weight="bold" font-family="monospace" text-anchor="middle">UNO</text>
+          <text x="210" y="120" fill="rgba(122,151,196,0.65)" font-size="6.5" font-family="monospace" text-anchor="middle">ATmega328P</text>
+          <text x="210" y="130" fill="rgba(122,151,196,0.5)"  font-size="6"   font-family="monospace" text-anchor="middle">Embedded C</text>
+
+          <!-- Arrow PROCESS → ACTUATE -->
+          <line x1="246" y1="105" x2="258" y2="105" stroke="#00C8FF" stroke-width="1.5" marker-end="url(#a3)"/>
+
+          <!-- Animated dot: Arduino to Servo -->
+          <circle r="3.5" fill="#00C8FF" opacity="0.9">
+            <animateMotion dur="1.8s" repeatCount="indefinite" begin="0.9s">
+              <mpath><path d="M246,105 L258,105"/></mpath>
+            </animateMotion>
+          </circle>
+
+          <!-- ACTUATE: Servo motor (animated rotating arm) -->
+          <rect x="258" y="78" width="36" height="36" rx="4" fill="#0D1F3A" stroke="#00C8FF" stroke-width="1.3"/>
+          <circle cx="276" cy="96" r="9" fill="none" stroke="#00C8FF" stroke-width="1.2"/>
+          <circle cx="276" cy="96" r="3" fill="#00C8FF" opacity="0.6"/>
+          <!-- Rotating servo arm -->
+          <line x1="276" y1="96" x2="276" y2="86" stroke="#00C8FF" stroke-width="2">
+            <animateTransform attributeName="transform" type="rotate" values="0 276 96; 40 276 96; 0 276 96; -40 276 96; 0 276 96" dur="3s" repeatCount="indefinite"/>
+          </line>
+          <text x="255" y="128" fill="#00C8FF" font-size="7" font-family="monospace">SERVO SG90</text>
+
+          <!-- Arrow ACTUATE → HARVEST -->
+          <line x1="294" y1="96" x2="306" y2="96" stroke="#00C8A0" stroke-width="1.5" marker-end="url(#a3)"/>
+          <circle r="3" fill="#00C8A0" opacity="0.9">
+            <animateMotion dur="1.8s" repeatCount="indefinite" begin="1.35s">
+              <mpath><path d="M294,96 L306,96"/></mpath>
+            </animateMotion>
+          </circle>
+
+          <!-- HARVEST: Solar panel (tilting) -->
+          <rect x="306" y="68" width="42" height="26" rx="3" fill="#112233" stroke="#00C8A0" stroke-width="1.3">
+            <animateTransform attributeName="transform" type="rotate" values="0 327 81; 12 327 81; 0 327 81; -12 327 81; 0 327 81" dur="3s" repeatCount="indefinite"/>
+          </rect>
+          <line x1="310" y1="68" x2="310" y2="94" stroke="rgba(0,200,160,0.25)" stroke-width="0.7"/>
+          <line x1="320" y1="68" x2="320" y2="94" stroke="rgba(0,200,160,0.25)" stroke-width="0.7"/>
+          <line x1="330" y1="68" x2="330" y2="94" stroke="rgba(0,200,160,0.25)" stroke-width="0.7"/>
+          <line x1="306" y1="78" x2="348" y2="78" stroke="rgba(0,200,160,0.25)" stroke-width="0.7"/>
+          <line x1="306" y1="84" x2="348" y2="84" stroke="rgba(0,200,160,0.25)" stroke-width="0.7"/>
+          <text x="306" y="113" fill="#7FFFDA" font-size="7" font-family="monospace">SOLAR PANEL</text>
+          <text x="305" y="123" fill="rgba(0,200,160,0.5)" font-size="6.5" font-family="monospace">AUTO TRACKS ☀</text>
+
+          <!-- Efficiency label -->
+          <rect x="305" y="133" width="48" height="16" rx="3" fill="#0D2045" stroke="rgba(0,200,160,0.35)" stroke-width="1"/>
+          <text x="329" y="144" fill="#7FFFDA" font-size="7" font-family="monospace" text-anchor="middle">MAX YIELD</text>
+        </svg>
+      </div>
+      <div class="project-body">
+        <div class="project-tags">
+          <span class="ptag">Arduino UNO</span>
+          <span class="ptag">Embedded C</span>
+          <span class="ptag">LDR Sensors</span>
+          <span class="ptag">Servo Motor</span>
+          <span class="ptag">Proteus</span>
+        </div>
+        <h3>Arduino-Based Automatic Sun Tracking Solar Panel</h3>
+        <p>Dual-axis solar tracker using LDR sensors and servo motors programmed in Embedded C on Arduino UNO. Validated in Proteus before physical assembly; presented at Science Exhibition, HIT (Feb 2026).</p>
+        <div class="project-links">
+          <a class="plink" href="#">📋 Presented at HIT Science Exhibition, Feb 2026</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project 2: PhysioGuard Flow -->
+    <div class="project-card reveal">
+      <div class="project-vis">
+        <svg viewBox="0 0 360 210" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="b1" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0.5 L0,6.5 L6.5,3.5 z" fill="#FF6B6B"/></marker>
+            <marker id="b2" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0.5 L0,6.5 L6.5,3.5 z" fill="#00C8A0"/></marker>
+            <marker id="b3" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0.5 L0,6.5 L6.5,3.5 z" fill="#FFD700"/></marker>
+          </defs>
+
+          <!-- Header -->
+          <text x="14" y="16" fill="rgba(0,200,160,0.55)" font-size="7.5" font-family="monospace" letter-spacing="1.5">PHYSIOGUARD · INPUT → PROCESS → OUTPUT</text>
+          <line x1="14" y1="20" x2="346" y2="20" stroke="rgba(0,200,160,0.18)" stroke-width="0.8"/>
+
+          <!-- Stage labels -->
+          <text x="20" y="202" fill="rgba(255,107,107,0.5)" font-size="8" font-family="monospace" font-weight="600">INPUT</text>
+          <text x="115" y="202" fill="rgba(0,200,160,0.5)" font-size="8" font-family="monospace" font-weight="600">SENSE</text>
+          <text x="210" y="202" fill="rgba(0,200,160,0.5)" font-size="8" font-family="monospace" font-weight="600">PROCESS</text>
+          <text x="298" y="202" fill="rgba(255,215,0,0.5)" font-size="8" font-family="monospace" font-weight="600">OUTPUT</text>
+
+          <!-- Stage dividers -->
+          <line x1="105" y1="25" x2="105" y2="195" stroke="rgba(255,255,255,0.05)" stroke-width="1" stroke-dasharray="4,4"/>
+          <line x1="198" y1="25" x2="198" y2="195" stroke="rgba(255,255,255,0.05)" stroke-width="1" stroke-dasharray="4,4"/>
+          <line x1="283" y1="25" x2="283" y2="195" stroke="rgba(255,255,255,0.05)" stroke-width="1" stroke-dasharray="4,4"/>
+
+          <!-- INPUT: Two sensors stacked -->
+          <!-- LM35 temp sensor -->
+          <rect x="14" y="72" width="76" height="34" rx="5" fill="#0D1F3A" stroke="#FF6B6B" stroke-width="1.3"/>
+          <text x="52" y="87" fill="#FF6B6B" font-size="8" font-family="monospace" text-anchor="middle" font-weight="600">LM35</text>
+          <text x="52" y="98" fill="rgba(255,107,107,0.6)" font-size="6.5" font-family="monospace" text-anchor="middle">Temp Sensor</text>
+          <!-- heartbeat on LM35 -->
+          <circle cx="20" cy="76" r="3" fill="#FF6B6B"><animate attributeName="opacity" values="1;0.2;1" dur="1s" repeatCount="indefinite"/></circle>
+
+          <!-- AD8232 ECG -->
+          <rect x="14" y="118" width="76" height="34" rx="5" fill="#0D1F3A" stroke="#00C8A0" stroke-width="1.3"/>
+          <text x="52" y="133" fill="#00C8A0" font-size="8" font-family="monospace" text-anchor="middle" font-weight="600">AD8232</text>
+          <text x="52" y="144" fill="rgba(0,200,160,0.6)" font-size="6.5" font-family="monospace" text-anchor="middle">ECG Sensor</text>
+
+          <!-- Arrows INPUT → PROCESS (going right, merging at arduino) -->
+          <line x1="90" y1="89" x2="114" y2="89" stroke="#FF6B6B" stroke-width="1.3" marker-end="url(#b1)"/>
+          <line x1="90" y1="135" x2="114" y2="135" stroke="#00C8A0" stroke-width="1.3" marker-end="url(#b2)"/>
+
+          <!-- Animated dots -->
+          <circle r="3" fill="#FF6B6B" opacity="0.9">
+            <animateMotion dur="2s" repeatCount="indefinite" begin="0s">
+              <mpath><path d="M90,89 L114,89"/></mpath>
+            </animateMotion>
+          </circle>
+          <circle r="3" fill="#00C8A0" opacity="0.9">
+            <animateMotion dur="2s" repeatCount="indefinite" begin="0.6s">
+              <mpath><path d="M90,135 L114,135"/></mpath>
+            </animateMotion>
+          </circle>
+
+          <!-- PROCESS: Arduino UNO -->
+          <rect x="114" y="68" width="72" height="90" rx="5" fill="#0D1F3A" stroke="#00C8A0" stroke-width="1.8"/>
+          <path d="M132,68 Q150,60 168,68" fill="none" stroke="#00C8A0" stroke-width="1.2"/>
+          <text x="150" y="96" fill="#00C8A0" font-size="9" font-weight="bold" font-family="monospace" text-anchor="middle">ARDUINO</text>
+          <text x="150" y="109" fill="#00C8A0" font-size="9" font-weight="bold" font-family="monospace" text-anchor="middle">UNO</text>
+          <text x="150" y="122" fill="rgba(122,151,196,0.7)" font-size="6.5" font-family="monospace" text-anchor="middle">ATmega328P</text>
+          <text x="150" y="133" fill="rgba(122,151,196,0.6)" font-size="6" font-family="monospace" text-anchor="middle">Embedded C</text>
+          <text x="150" y="150" fill="rgba(122,151,196,0.5)" font-size="6" font-family="monospace" text-anchor="middle">Proteus Validated</text>
+
+          <!-- Arrow PROCESS → OUTPUT -->
+          <line x1="186" y1="113" x2="198" y2="113" stroke="#FFD700" stroke-width="1.5" marker-end="url(#b3)"/>
+          <circle r="3" fill="#FFD700" opacity="0.9">
+            <animateMotion dur="2s" repeatCount="indefinite" begin="1.2s">
+              <mpath><path d="M186,113 L198,113"/></mpath>
+            </animateMotion>
+          </circle>
+
+          <!-- OUTPUT: LCD Display -->
+          <rect x="198" y="68" width="74" height="90" rx="5" fill="#0A2010" stroke="#00FF44" stroke-width="1.5"/>
+          <!-- LCD pixel rows -->
+          <rect x="205" y="77" width="60" height="10" rx="1" fill="#0A2A10" stroke="rgba(0,220,80,0.25)" stroke-width="0.6"/>
+          <rect x="205" y="90" width="60" height="10" rx="1" fill="#0A2A10" stroke="rgba(0,220,80,0.25)" stroke-width="0.6"/>
+          <rect x="205" y="103" width="60" height="10" rx="1" fill="#0A2A10" stroke="rgba(0,220,80,0.25)" stroke-width="0.6"/>
+          <rect x="205" y="116" width="60" height="10" rx="1" fill="#0A2A10" stroke="rgba(0,220,80,0.25)" stroke-width="0.6"/>
+          <text x="208" y="86" fill="#00FF44" font-size="6.5" font-family="monospace">Temp: 36.8°C</text>
+          <text x="208" y="99" fill="#00FF44" font-size="6.5" font-family="monospace">Pulse: 72 BPM</text>
+          <text x="208" y="112" fill="rgba(0,255,68,0.45)" font-size="6" font-family="monospace">Status: Normal</text>
+          <text x="208" y="125" fill="rgba(0,255,68,0.3)" font-size="6" font-family="monospace">PhysioGuard v1</text>
+          <text x="210" y="150" fill="rgba(0,255,68,0.5)" font-size="6.5" font-family="monospace">20×4 LCD</text>
+
+          <!-- ECG waveform strip below LCD -->
+          <rect x="283" y="82" width="66" height="44" rx="4" fill="#0A1520" stroke="rgba(255,107,107,0.5)" stroke-width="1.2"/>
+          <polyline points="289,104 294,104 297,95 300,113 303,91 306,108 309,104 322,104 327,104 330,97 333,111 336,93 339,106 342,104" fill="none" stroke="#FF6B6B" stroke-width="1.5"/>
+          <circle cx="336" cy="93" r="2.5" fill="#FF6B6B"><animate attributeName="opacity" values="1;0.2;1" dur="0.8s" repeatCount="indefinite"/></circle>
+          <text x="285" y="140" fill="rgba(255,107,107,0.5)" font-size="6.5" font-family="monospace">ECG LIVE</text>
+          <!-- cost badge -->
+          <rect x="283" y="150" width="66" height="22" rx="3" fill="#0D2045" stroke="rgba(255,213,128,0.4)" stroke-width="1"/>
+          <text x="316" y="165" fill="#FFD580" font-size="7.5" font-family="monospace" text-anchor="middle">₹1,050 COST</text>
+        </svg>
+      </div>
+      <div class="project-body">
+        <div class="project-tags">
+          <span class="ptag">Arduino UNO</span>
+          <span class="ptag">LM35 Sensor</span>
+          <span class="ptag">AD8232 ECG</span>
+          <span class="ptag">LCD Display</span>
+          <span class="ptag">Embedded C</span>
+        </div>
+        <h3>PhysioGuard: Real-Time Health Monitoring Device</h3>
+        <p>Portable device measuring real-time body temperature and pulse with live LCD display. Low-cost ₹1,050 prototype designed for offline rural and home healthcare — validated in Proteus before hardware build.</p>
+        <div class="project-links">
+          <a class="plink" href="#">💡 ₹1,050 Cost-Optimized Prototype</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project 3: IoT Dashboard Flow -->
+    <div class="project-card reveal">
+      <div class="project-vis">
+        <svg viewBox="0 0 360 210" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="c1" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0.5 L0,6.5 L6.5,3.5 z" fill="#FFB347"/></marker>
+            <marker id="c2" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0.5 L0,6.5 L6.5,3.5 z" fill="#00C8FF"/></marker>
+            <marker id="c3" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0.5 L0,6.5 L6.5,3.5 z" fill="#7C4DFF"/></marker>
+            <marker id="c4" markerWidth="7" markerHeight="7" refX="6" refY="3.5" orient="auto"><path d="M0,0.5 L0,6.5 L6.5,3.5 z" fill="#00C8A0"/></marker>
+          </defs>
+
+          <!-- Header -->
+          <text x="14" y="16" fill="rgba(0,200,255,0.55)" font-size="7.5" font-family="monospace" letter-spacing="1.5">IoT DASHBOARD · INPUT → TRANSMIT → OUTPUT</text>
+          <line x1="14" y1="20" x2="346" y2="20" stroke="rgba(0,200,255,0.18)" stroke-width="0.8"/>
+
+          <!-- Stage labels -->
+          <text x="20" y="202" fill="rgba(255,179,71,0.5)" font-size="8" font-family="monospace" font-weight="600">SENSORS</text>
+          <text x="130" y="202" fill="rgba(0,200,255,0.5)" font-size="8" font-family="monospace" font-weight="600">ESP8266</text>
+          <text x="225" y="202" fill="rgba(124,77,255,0.5)" font-size="8" font-family="monospace" font-weight="600">MQTT</text>
+          <text x="298" y="202" fill="rgba(0,200,160,0.5)" font-size="8" font-family="monospace" font-weight="600">DASHBOARD</text>
+
+          <!-- Stage dividers -->
+          <line x1="115" y1="25" x2="115" y2="195" stroke="rgba(255,255,255,0.05)" stroke-width="1" stroke-dasharray="4,4"/>
+          <line x1="210" y1="25" x2="210" y2="195" stroke="rgba(255,255,255,0.05)" stroke-width="1" stroke-dasharray="4,4"/>
+          <line x1="283" y1="25" x2="283" y2="195" stroke="rgba(255,255,255,0.05)" stroke-width="1" stroke-dasharray="4,4"/>
+
+          <!-- INPUT sensors stacked -->
+          <rect x="10" y="46" width="94" height="22" rx="4" fill="#0D1F3A" stroke="#FFB347" stroke-width="1.2"/>
+          <text x="57" y="61" fill="#FFD580" font-size="8" font-family="monospace" text-anchor="middle">DHT11 · Temp/Humidity</text>
+
+          <rect x="10" y="76" width="94" height="22" rx="4" fill="#0D1F3A" stroke="#00C8A0" stroke-width="1.2"/>
+          <text x="57" y="91" fill="#7FFFDA" font-size="8" font-family="monospace" text-anchor="middle">LDR · Light Level</text>
+
+          <rect x="10" y="106" width="94" height="22" rx="4" fill="#0D1F3A" stroke="#FF6B6B" stroke-width="1.2"/>
+          <text x="57" y="121" fill="#FFB3B3" font-size="8" font-family="monospace" text-anchor="middle">PIR · Motion</text>
+
+          <rect x="10" y="136" width="94" height="22" rx="4" fill="#0D1F3A" stroke="#B39DFF" stroke-width="1.2"/>
+          <text x="57" y="151" fill="#D1C4FF" font-size="8" font-family="monospace" text-anchor="middle">MQ-2 · Gas</text>
+
+          <!-- Arrows sensors → ESP -->
+          <line x1="104" y1="57" x2="120" y2="100" stroke="#FFB347" stroke-width="1" stroke-dasharray="3,2" marker-end="url(#c1)"/>
+          <line x1="104" y1="87" x2="120" y2="105" stroke="#00C8A0" stroke-width="1" stroke-dasharray="3,2" marker-end="url(#c4)"/>
+          <line x1="104" y1="117" x2="120" y2="112" stroke="#FF6B6B" stroke-width="1" stroke-dasharray="3,2" marker-end="url(#c1)"/>
+          <line x1="104" y1="147" x2="120" y2="118" stroke="#B39DFF" stroke-width="1" stroke-dasharray="3,2" marker-end="url(#c1)"/>
+
+          <!-- Animated multi-channel flow dots -->
+          <circle r="3" fill="#FFB347" opacity="0.85">
+            <animateMotion dur="2.2s" repeatCount="indefinite" begin="0s"><mpath><path d="M104,57 Q113,78 120,100"/></mpath></animateMotion>
+          </circle>
+          <circle r="3" fill="#00C8A0" opacity="0.85">
+            <animateMotion dur="2.2s" repeatCount="indefinite" begin="0.55s"><mpath><path d="M104,87 Q112,96 120,105"/></mpath></animateMotion>
+          </circle>
+          <circle r="3" fill="#FF6B6B" opacity="0.85">
+            <animateMotion dur="2.2s" repeatCount="indefinite" begin="1.1s"><mpath><path d="M104,117 Q112,114 120,112"/></mpath></animateMotion>
+          </circle>
+          <circle r="3" fill="#B39DFF" opacity="0.85">
+            <animateMotion dur="2.2s" repeatCount="indefinite" begin="1.65s"><mpath><path d="M104,147 Q112,133 120,118"/></mpath></animateMotion>
+          </circle>
+
+          <!-- ESP8266 block -->
+          <rect x="120" y="70" width="84" height="88" rx="5" fill="#0D1F3A" stroke="#00C8FF" stroke-width="1.8"/>
+          <path d="M142,70 Q162,62 182,70" fill="none" stroke="#00C8FF" stroke-width="1.2"/>
+          <text x="162" y="99" fill="#00C8FF" font-size="10" font-weight="bold" font-family="monospace" text-anchor="middle">ESP8266</text>
+          <text x="162" y="113" fill="rgba(122,151,196,0.7)" font-size="7" font-family="monospace" text-anchor="middle">NodeMCU v3</text>
+          <text x="162" y="124" fill="rgba(122,151,196,0.65)" font-size="6.5" font-family="monospace" text-anchor="middle">Wi-Fi · MQTT</text>
+          <!-- Wi-Fi arcs -->
+          <path d="M151,144 Q162,136 173,144" fill="none" stroke="#00C8FF" stroke-width="1.2" opacity="0.6"/>
+          <path d="M145,152 Q162,141 179,152" fill="none" stroke="#00C8FF" stroke-width="1" opacity="0.35"/>
+
+          <!-- Arrow ESP → MQTT -->
+          <line x1="204" y1="114" x2="216" y2="114" stroke="#7C4DFF" stroke-width="1.5" marker-end="url(#c3)"/>
+          <circle r="3" fill="#00C8FF" opacity="0.9">
+            <animateMotion dur="2.2s" repeatCount="indefinite" begin="0s"><mpath><path d="M204,114 L216,114"/></mpath></animateMotion>
+          </circle>
+
+          <!-- MQTT broker -->
+          <rect x="216" y="88" width="62" height="50" rx="4" fill="#0D1F3A" stroke="#7C4DFF" stroke-width="1.3"/>
+          <text x="247" y="109" fill="#B39DFF" font-size="8" font-family="monospace" text-anchor="middle" font-weight="600">MQTT</text>
+          <text x="247" y="121" fill="#B39DFF" font-size="8" font-family="monospace" text-anchor="middle" font-weight="600">BROKER</text>
+          <text x="247" y="131" fill="rgba(179,157,255,0.5)" font-size="6" font-family="monospace" text-anchor="middle">HiveMQ</text>
+
+          <!-- Arrow MQTT → Dashboard -->
+          <line x1="278" y1="113" x2="290" y2="100" stroke="#00C8A0" stroke-width="1.5" marker-end="url(#c4)"/>
+          <circle r="3" fill="#7C4DFF" opacity="0.9">
+            <animateMotion dur="2.2s" repeatCount="indefinite" begin="0.7s"><mpath><path d="M278,113 L290,100"/></mpath></animateMotion>
+          </circle>
+
+          <!-- Dashboard output -->
+          <rect x="290" y="46" width="60" height="130" rx="5" fill="#0D1F3A" stroke="#00C8A0" stroke-width="1.5"/>
+          <!-- mini bar chart inside -->
+          <text x="320" y="62" fill="#7FFFDA" font-size="7" font-family="monospace" text-anchor="middle" font-weight="600">DASHBOARD</text>
+          <rect x="298" y="70" width="10" height="30" rx="1" fill="#FFB347" opacity="0.7"/>
+          <rect x="312" y="80" width="10" height="20" rx="1" fill="#00C8A0" opacity="0.7"/>
+          <rect x="326" y="65" width="10" height="35" rx="1" fill="#7C4DFF" opacity="0.7"/>
+          <rect x="340" y="75" width="6" height="25" rx="1" fill="#FF6B6B" opacity="0.7"/>
+          <line x1="295" y1="100" x2="350" y2="100" stroke="rgba(255,255,255,0.1)" stroke-width="0.8"/>
+          <!-- live indicators -->
+          <circle cx="300" cy="116" r="3" fill="#00C8A0"><animate attributeName="opacity" values="1;0.2;1" dur="1s" repeatCount="indefinite"/></circle>
+          <text x="307" y="120" fill="rgba(0,200,160,0.7)" font-size="6.5" font-family="monospace">LIVE</text>
+          <text x="296" y="134" fill="rgba(127,255,218,0.5)" font-size="6" font-family="monospace">Temp · Humidity</text>
+          <text x="296" y="144" fill="rgba(127,255,218,0.4)" font-size="6" font-family="monospace">Light · Motion</text>
+          <text x="296" y="154" fill="rgba(127,255,218,0.35)" font-size="6" font-family="monospace">Gas Alerts</text>
+          <!-- in dev badge -->
+          <rect x="291" y="162" width="58" height="11" rx="2" fill="#0D2045" stroke="rgba(255,179,71,0.4)" stroke-width="1"/>
+          <circle cx="298" cy="167.5" r="2.5" fill="#FFB347"><animate attributeName="opacity" values="1;0.2;1" dur="1.2s" repeatCount="indefinite"/></circle>
+          <text x="303" y="171" fill="#FFD580" font-size="6" font-family="monospace">IN PROGRESS</text>
+        </svg>
+      </div>
+      <div class="project-body">
+        <div class="project-tags">
+          <span class="ptag">ESP8266</span>
+          <span class="ptag">MQTT</span>
+          <span class="ptag">IoT</span>
+          <span class="ptag">Python</span>
+          <span class="ptag">Dashboard</span>
+        </div>
+        <h3>IoT Sensor Dashboard (In Progress)</h3>
+        <p>A multi-sensor IoT hub using ESP8266 with MQTT protocol to stream temperature, humidity, light, and motion data to a real-time web dashboard — extending PhysioGuard's offline-first philosophy to connected monitoring.</p>
+        <div class="project-links">
+          <a class="plink" href="#">🚧 In Development</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certifications">
+  <div class="reveal">
+    <div class="section-label">Verified Learning</div>
+    <h2 class="section-title">Certifications</h2>
+    <div class="section-divider"></div>
+  </div>
+  <div class="cert-grid">
+    <div class="cert-card reveal">
+      <div class="cert-icon">⚙️</div>
+      <div class="cert-info">
+        <h4>Embedded System</h4>
+        <span>ID: 9492617</span>
+      </div>
+    </div>
+    <div class="cert-card reveal">
+      <div class="cert-icon">🐍</div>
+      <div class="cert-info">
+        <h4>Python Programming</h4>
+        <span>ID: ARDENT/169543</span>
+      </div>
+    </div>
+    <div class="cert-card reveal">
+      <div class="cert-icon">📐</div>
+      <div class="cert-info">
+        <h4>Data Structures & Algorithms (C)</h4>
+        <span>ID: ARDENT/169542</span>
+      </div>
+    </div>
+    <div class="cert-card reveal">
+      <div class="cert-icon">🤖</div>
+      <div class="cert-info">
+        <h4>Generative AI for Everyone</h4>
+        <span>Coursera · Verified</span>
+      </div>
+    </div>
+    <div class="cert-card reveal">
+      <div class="cert-icon">🧠</div>
+      <div class="cert-info">
+        <h4>Critical Thinking Skills for Professionals</h4>
+        <span>Coursera · Verified</span>
+      </div>
+    </div>
+    <div class="cert-card reveal">
+      <div class="cert-icon">📋</div>
+      <div class="cert-info">
+        <h4>Project Management: The Basics for Success</h4>
+        <span>Coursera · Verified</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="reveal">
+    <div class="section-label">What People Say</div>
+    <h2 class="section-title">Testimonials</h2>
+    <div class="section-divider"></div>
+  </div>
+  <div class="testi-grid">
+    <div class="testi-card reveal">
+      <p class="testi-text">Neha demonstrated exceptional dedication in our Electronics lab. Her Arduino-based solar tracker project showed rare initiative for a diploma-level student — she validated every component in simulation before touching hardware. That's professional engineering mindset.</p>
+      <div class="testi-author">
+        <div class="testi-avatar">👩‍🏫</div>
+        <div class="testi-author-info">
+          <div class="name">Faculty Mentor</div>
+          <div class="title">Electronics Dept · Women's Polytechnic Chandernagore</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card reveal">
+      <p class="testi-text">What stood out at our Science Exhibition was not just the technical competence, but how clearly Neha explained the real-world impact of her health monitor — a ₹1,050 device designed for rural communities. That's the kind of problem-first thinking we love to see.</p>
+      <div class="testi-author">
+        <div class="testi-avatar">🎓</div>
+        <div class="testi-author-info">
+          <div class="name">Exhibition Judge</div>
+          <div class="title">Hooghly Institute of Technology · Feb 2026</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card reveal">
+      <p class="testi-text">Neha consistently goes beyond the syllabus. Whether it's picking up Python on her own or earning multiple Coursera certifications alongside her diploma coursework, she shows the self-driven learning habit that makes a great engineer.</p>
+      <div class="testi-author">
+        <div class="testi-avatar">👨‍💻</div>
+        <div class="testi-author-info">
+          <div class="name">Senior Student Peer</div>
+          <div class="title">Women's Polytechnic Chandernagore</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="reveal">
+    <div class="section-label">Let's Connect</div>
+    <h2 class="section-title">Get in Touch</h2>
+    <div class="section-divider"></div>
+  </div>
+  <div class="contact-wrapper">
+    <div class="contact-info reveal">
+      <h3>Open to Opportunities</h3>
+      <p>I'm actively seeking entry-level roles in Embedded Systems, IoT, or Electronics Design. Feel free to reach out — I'd love to discuss how I can contribute to your team.</p>
+      <div class="contact-items">
+        <a class="contact-item" href="mailto:nehamahato0510@gmail.com">
+          <div class="ci-icon">✉️</div>
+          <div>
+            <div class="ci-label">Email</div>
+            <div class="ci-value">nehamahato0510@gmail.com</div>
+          </div>
+        </a>
+        <a class="contact-item" href="tel:+917003619781">
+          <div class="ci-icon">📞</div>
+          <div>
+            <div class="ci-label">Phone</div>
+            <div class="ci-value">+91 700XX XXXXX</div>
+          </div>
+        </a>
+        <a class="contact-item" href="https://linkedin.com/in/neha-mahato05/" target="_blank">
+          <div class="ci-icon">💼</div>
+          <div>
+            <div class="ci-label">LinkedIn</div>
+            <div class="ci-value">linkedin.com/in/neha-mahato05/</div>
+          </div>
+        </a>
+        <a class="contact-item" href="#">
+          <div class="ci-icon">📍</div>
+          <div>
+            <div class="ci-label">Location</div>
+            <div class="ci-value">Hooghly, West Bengal, India</div>
+          </div>
+        </a>
+      </div>
+    </div>
+    <div class="contact-form reveal">
+      <div class="form-group">
+        <label>Your Name</label>
+        <input type="text" placeholder="Jane Smith"/>
+      </div>
+      <div class="form-group">
+        <label>Email Address</label>
+        <input type="email" placeholder="jane@company.com"/>
+      </div>
+      <div class="form-group">
+        <label>Subject</label>
+        <input type="text" placeholder="Job Opportunity · Embedded Systems Role"/>
+      </div>
+      <div class="form-group">
+        <label>Message</label>
+        <textarea rows="5" placeholder="Hi Neha, I'd love to discuss…"></textarea>
+      </div>
+      <button class="btn-primary" style="width:100%; padding: 1rem;" onclick="alert('Thanks! Neha will get back to you soon.')">Send Message →</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>Designed & built with ❤️ by <span>Neha Mahato</span> · Electronics & Telecommunication Engineer</p>
+  <p style="margin-top:0.4rem; font-size:0.78rem;">© 2026 All rights reserved</p>
+</footer>
+
+<script>
+// Portrait upload
+function loadPortrait(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const frame = document.getElementById('portraitFrame');
+    const placeholder = document.getElementById('portraitPlaceholder');
+    placeholder.style.display = 'none';
+    // Remove old img if any
+    const oldImg = frame.querySelector('img');
+    if (oldImg) oldImg.remove();
+    const img = document.createElement('img');
+    img.src = e.target.result;
+    img.className = 'portrait-img';
+    frame.appendChild(img);
+  };
+  reader.readAsDataURL(file);
+}
+
+// Scroll-reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); }
+  });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Bar animations on scroll
+const barObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.querySelectorAll('.bar-fill').forEach((bar, i) => {
+        bar.style.animationDelay = `${i * 0.15}s`;
+        bar.style.animationPlayState = 'running';
+      });
+    }
+  });
+}, { threshold: 0.3 });
+document.querySelectorAll('.skill-card').forEach(card => {
+  card.querySelectorAll('.bar-fill').forEach(b => b.style.animationPlayState = 'paused');
+  barObserver.observe(card);
+});
+</script>
+
+</body>
+</html>
